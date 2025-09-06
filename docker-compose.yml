@@ -13,6 +13,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+    networks:
+      - app
 
   backstage:
     build:
@@ -35,7 +37,15 @@ services:
       - traefik.http.routers.${TRAEFIK_ROUTER_NAME}.tls.certresolver=mytlschallenge
       - traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=7007
     networks:
+      - app
       - traefik
 
 volumes:
   postgres_data:
+
+networks:
+  app:
+    driver: bridge
+  traefik:
+    external: true
+    name: traefik
