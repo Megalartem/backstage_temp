@@ -19,9 +19,5 @@ WORKDIR /app
 # опционально: отдельный кеш для yarn (ускоряет первый старт)
 RUN mkdir -p /home/node/.cache/yarn
 
-# маленький entrypoint, который сам поставит deps/соберёт, если нужно
-COPY --chown=node:node docker/entrypoint.sh /usr/local/bin/entrypoint.sh
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
-
 # Запуск backstage
 CMD ["node", "packages/backend", "--config", "app-config.yaml", "--config", "app-config.production.yaml"]
