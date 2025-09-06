@@ -19,7 +19,7 @@ services:
   backstage:
     build:
       context: .
-      dockerfile: packages/backend/Dockerfile
+      dockerfile: backstage/packages/backend/Dockerfile
     container_name: backstage-app
     restart: unless-stopped
     depends_on:
