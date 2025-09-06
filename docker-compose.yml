@@ -45,6 +45,7 @@ services:
 
 volumes:
   postgres_data:
+  yarn-cache:
 
 networks:
   app:
