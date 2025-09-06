@@ -24,7 +24,7 @@ services:
       postgres:
         condition: service_healthy
     ports:
-      - "${BACKSTAGE_PORT-7007}:7007"
+      - "${BACKSTAGE_PORT}:7007"
     env_file: .env
     # volumes:
     #   - ./app-config.local.yaml:/app/app-config.local.yaml:ro
