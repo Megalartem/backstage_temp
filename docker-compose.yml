@@ -28,6 +28,8 @@ services:
     ports:
       - "${BACKSTAGE_PORT}:7007"
     env_file: .env
+    volumes:
+      - ./backstage:/app
     labels:
       - traefik.enable=true
       - traefik.docker.network=traefik
