@@ -26,8 +26,16 @@ services:
     ports:
       - "${BACKSTAGE_PORT}:7007"
     env_file: .env
-    # volumes:
-    #   - ./app-config.local.yaml:/app/app-config.local.yaml:ro
+    labels:
+      - traefik.enable=true
+      - traefik.docker.network=traefik
+      - traefik.http.routers.${TRAEFIK_ROUTER_NAME}.rule=Host(`${BACKSTAGE_HOST}.${DOMAIN_NAME}`)
+      - traefik.http.routers.${TRAEFIK_ROUTER_NAME}.entrypoints=web,websecure
+      - traefik.http.routers.${TRAEFIK_ROUTER_NAME}.tls=true
+      - traefik.http.routers.${TRAEFIK_ROUTER_NAME}.tls.certresolver=mytlschallenge
+      - traefik.http.services.${TRAEFIK_SERVICE_NAME}.loadbalancer.server.port=7007
+    networks:
+      - traefik
 
 volumes:
   postgres_data:
